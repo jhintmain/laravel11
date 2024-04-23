@@ -8,4 +8,10 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //})->middleware('auth:sanctum');
 
-Route::get('/user', [UserController::class,'get'])->middleware('api-middleware');
+Route::group(['middleware' => 'api-middleware'], function () {
+    //
+    Route::get('/user/{id}', [UserController::class,'get'])
+    ->where('id', '[0-9]+');
+
+    Route::post('/user', [UserController::class,'create']);
+});
