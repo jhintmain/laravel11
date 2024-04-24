@@ -10,19 +10,19 @@ use Illuminate\View\Component;
 class Alert extends Component
 {
 
-    public $type;
+    public string $type;
+    public ?string $message;
+    public ?string $etc;
     /**
      * Create a new component instance.
      */
-    public function __construct($type)
+    public function __construct($type, $message = null,$etc = null)
     {
         $this->type = $type;
+        $this->message = $message;
+        $this->etc = $etc;
     }
 
-    public function boot(): void
-    {
-        Blade::component('package-alert', Alert::class);
-    }
     /**
      * Get the view / contents that represent the component.
      */

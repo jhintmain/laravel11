@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::group(['middleware' => 'web-middleware'], function () {
 
@@ -20,9 +20,9 @@ Route::group(['middleware' => 'web-middleware'], function () {
         });
 
         Route::prefix('blade')->group(function () {
-            Route::get('loof', function () {
-                return view('test.blade.loof');
-            })->name('test.blade.loof');
+            Route::get('loop', function () {
+                return view('test.blade.loop');
+            })->name('test.blade.loop');
 
             Route::get('conditional_class', function () {
                 return view('test.blade.conditional_class');
