@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Member;
-use Faker\Provider\Uuid;
 
 class UserController extends Controller
 {
@@ -16,13 +15,14 @@ class UserController extends Controller
 
     public function get(int $id)
     {
-        try{
+
 //            $res = $this->member->findOrFail($id);
 //            $res = $this->member
 //                ->where('name','John Doe-ff119d84-6b4b-3a70-ab6e-70e93c4e3c80')
 //                ->firstOrFail();
             echo '<hr>';
-            $res1 = $this->member->get();
+//            $res1 = $this->member->get();
+            $res1 = $this->member->find($id);
             foreach ($res1 as $res){
                 echo $res->name.'<br>';
             }
@@ -42,10 +42,6 @@ class UserController extends Controller
             foreach ($res3 as $res){
                 echo $res->name.'<br>';
             }
-
-        }catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()]);
-        }
 
         return response()->json(['message' => 'get-success']);
     }

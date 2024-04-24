@@ -15,7 +15,6 @@ class ApiMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        echo get_called_class();
         return $next($request);
     }
 }
