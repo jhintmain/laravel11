@@ -16,7 +16,10 @@
             </tr>
             </thead>
             <tbody class="table-group-divider">
-            @foreach($members as $member)
+            @forelse ($members as $member)
+                @if ($loop->first)
+                    This is the first iteration.
+                @endif
                 <tr>
                     <td>{{$member->id}}</td>
                     <td>{{$member->name}}</td>
@@ -27,7 +30,14 @@
                     <td>{{$member->updated_at}}</td>
                     <td>{{$member->deleted_at ?? '-'}}</td>
                 </tr>
-            @endforeach
+                @if ($loop->last)
+                    This is the last iteration.
+                @endif
+            @empty
+                <tr>
+                    <td colspan="8">데이터가 없습니다.</td>
+                </tr>
+            @endforelse
             </tbody>
         </table>
 
