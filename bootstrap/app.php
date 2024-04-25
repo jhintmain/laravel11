@@ -6,6 +6,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Routing\Exceptions\InvalidSignatureException;
+use Illuminate\Validation\ValidationException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -22,8 +23,18 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-
         $exceptions->render(function (\Exception $e) {
+
+            // 예외처리 안하는 Exception 선언
+            $passExceptions = [
+                ValidationException::class,
+            ];
+            foreach ($passExceptions as $passException) {
+                if ($e instanceof $passException) {
+                    return null;
+                }
+            }
+
             $viewData = [
                 'file' => $e->getFile(),
                 'line' => $e->getLine(),
@@ -36,7 +47,9 @@ return Application::configure(basePath: dirname(__DIR__))
                 $stateCode = 403;
                 $viewPage = 'errors.link-expired';
             }
+
             return response()->view($viewPage, $viewData, $stateCode);
+
         });
 
     })->create();

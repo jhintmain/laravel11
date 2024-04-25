@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Member;
-use Illuminate\Support\Arr;
+use Illuminate\Http\Request;
 
 class TestController
 {
@@ -16,6 +16,15 @@ class TestController
     public function index()
     {
         return 'Hello World';
+    }
+
+    public function validationTest(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|max:3',
+            'nickname' => 'required',
+        ]);
+//        return redirect()->route('test.validation');
     }
 
     public function sessionTest()
@@ -40,11 +49,11 @@ class TestController
         $missing = session()->missing('user');
 
         // push
-        session(['user.add'=> 'add']);
+        session(['user.add' => 'add']);
         $push = session()->only(['user']);
 
         // pull
-        $pull =  session()->pull('user.add');
+        $pull = session()->pull('user.add');
 
         // forget
         session()->forget('user.deleted_at');
@@ -59,15 +68,15 @@ class TestController
         $now = session()->only(['user']);
 
         $viewData = [
-            'all' =>$all,
-            'has' =>$has,
-            'exists' =>$exists,
-            'missing' =>$missing,
-            'push' =>$push,
-            'pull' =>$pull,
-            'forget' =>$forget,
-            'flush' =>$flush,
-            'now' =>$now,
+            'all' => $all,
+            'has' => $has,
+            'exists' => $exists,
+            'missing' => $missing,
+            'push' => $push,
+            'pull' => $pull,
+            'forget' => $forget,
+            'flush' => $flush,
+            'now' => $now,
         ];
 
         return view('test.session', $viewData);

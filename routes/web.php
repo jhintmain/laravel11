@@ -22,6 +22,11 @@ Route::group(['middleware' => 'web-middleware'], function () {
 
         Route::get('session',[TestController::class, 'sessionTest']);
 
+        Route::post('validation',[TestController::class, 'validationTest'])->name('test.validationTest');
+        Route::get('validation', function () {
+            return view('test.validation');
+        })->name('test.validation');
+
         Route::prefix('blade')->group(function () {
             Route::get('loop', function () {
                 return view('test.blade.loop');
