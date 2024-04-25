@@ -5,6 +5,7 @@ use App\Http\Middleware\WebMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Routing\Exceptions\InvalidSignatureException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -21,14 +22,21 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
+
         $exceptions->render(function (\Exception $e) {
-            return response()->view('errors.500', [
+            $viewData = [
                 'file' => $e->getFile(),
                 'line' => $e->getLine(),
                 'message' => $e->getMessage(),
-//                'description' => json_encode($e->getTrace()),
-
-            ], 500);
+                'description' => json_encode($e->getTrace()),
+            ];
+            $stateCode = 500;
+            $viewPage = 'errors.500';
+            if($e instanceof InvalidSignatureException){
+                $stateCode = 403;
+                $viewPage = 'errors.link-expired';
+            }
+            return response()->view($viewPage, $viewData, $stateCode);
         });
 
     })->create();

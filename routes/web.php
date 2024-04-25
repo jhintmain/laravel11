@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\MemberController;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,8 @@ Route::group(['middleware' => 'web-middleware'], function () {
         Route::get('vite', function () {
             return view('test.vite');
         });
+
+        Route::get('session',[TestController::class, 'sessionTest']);
 
         Route::prefix('blade')->group(function () {
             Route::get('loop', function () {
@@ -42,7 +45,7 @@ Route::group(['middleware' => 'web-middleware'], function () {
 
     // memeber
     Route::prefix('member')->group(function () {
-        Route::get('list', [MemberController::class, 'list']);
+        Route::get('list', [MemberController::class, 'list'])->name('member.list');
     });
 });
 
