@@ -21,8 +21,8 @@ class UserController extends Controller
 //                ->where('name','John Doe-ff119d84-6b4b-3a70-ab6e-70e93c4e3c80')
 //                ->firstOrFail();
             echo '<hr>';
-//            $res1 = $this->member->get();
-            $res1 = $this->member->find($id);
+            $res1 = $this->member->get();
+//            $res1 = $this->member->find($id);
             foreach ($res1 as $res){
                 echo $res->name.'<br>';
             }

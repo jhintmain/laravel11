@@ -28,9 +28,13 @@ Route::group(['middleware' => 'web-middleware'], function () {
                 return view('test.blade.conditional_class');
             })->name('test.blade.conditional_class');
 
-            Route::get('component', function () {
-                return view('test.blade.component');
-            })->name('test.blade.component');
+            Route::get('component_alert', function () {
+                return view('test.blade.component_alert');
+            })->name('test.blade.component_alert');
+
+            Route::get('component_input', function () {
+                return view('test.blade.component_input');
+            })->name('test.blade.component_input');
 
 
         });

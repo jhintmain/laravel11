@@ -23,7 +23,7 @@
                 <tr>
                     <td>{{$member->id}}</td>
                     <td>{{$member->name}}</td>
-                    <td>{{$member->email}}</td>
+                    <td>{{$member->email}} </td>
                     <td>{{$member->address}}</td>
                     <td>{{$member->status}}</td>
                     <td>{{$member->created_at}}</td>
