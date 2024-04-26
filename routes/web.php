@@ -27,6 +27,13 @@ Route::group(['middleware' => 'web-middleware'], function () {
             return view('test.validation');
         })->name('test.validation');
 
+        Route::prefix('auth')->group(function () {
+            Route::get('make',[MemberController::class, 'authMake'])->name('test.auth.make');
+            Route::get('access',[MemberController::class, 'authAccess'])->name('test.auth.access');
+        });
+
+
+
         Route::prefix('blade')->group(function () {
             Route::get('loop', function () {
                 return view('test.blade.loop');

@@ -19,15 +19,22 @@ class MemberController
     {
         $members = $this->member->withTrashed()->paginate(10);
 
-        throw_if(! request()->hasValidSignature(), InvalidSignatureException::class);
-
         $viewData = [
             'members' => $members,
-            'signedUrl' => URL::temporarySignedRoute('member.list', Carbon::now()->addMinutes(1)),
         ];
         return view('member.list', $viewData);
 
     }
 
+    public function authMake()
+    {
+        return URL::temporarySignedRoute('test.auth.access', Carbon::now()->addMinutes(1));
+    }
+
+    public function authAccess()
+    {
+        throw_if(!request()->hasValidSignature(), InvalidSignatureException::class);
+        return '인증 성공';
+    }
 
 }

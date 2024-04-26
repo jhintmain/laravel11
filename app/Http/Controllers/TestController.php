@@ -24,7 +24,6 @@ class TestController
             'name' => 'required|max:3',
             'nickname' => 'required',
         ]);
-//        return redirect()->route('test.validation');
     }
 
     public function sessionTest()

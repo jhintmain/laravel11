@@ -41,7 +41,6 @@
             </tbody>
         </table>
 
-        {{ $signedUrl }}
         <div class="pagination">
             <!-- 첫 페이지 링크 -->
             <li class="page-item {{ $members->onFirstPage() ? 'disabled' : '' }}" aria-disabled="{{ $members->onFirstPage() ? 'true' : 'false' }}">
