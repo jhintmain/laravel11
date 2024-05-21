@@ -6,6 +6,8 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Sanctum\PersonalAccessToken;
+use Laravel\Sanctum\Sanctum;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,5 +30,6 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('debug', function ($expression) {
             return "<?php dd({$expression}); ?>";
         });
+        Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Member;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -11,6 +12,13 @@ class UserController extends Controller
         private readonly Member $member
     )
     {
+    }
+
+    public function token(int $id){
+
+        $member = $this->member->findOrFail($id);
+        $token = $member->createToken('token_create_2');
+        return ['token' => $token->plainTextToken];
     }
 
     public function get(int $id)
